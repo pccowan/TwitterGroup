@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TwtData implements Serializable{
+	
 	private String feed;
 	private Date date;
 	
