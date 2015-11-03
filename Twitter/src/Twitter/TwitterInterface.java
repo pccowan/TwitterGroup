@@ -3,13 +3,19 @@ package Twitter;
 import java.util.ArrayList;
 
 import model.Twitterfeed;
+import model.Twitteruser;
 
 public class TwitterInterface {
 	TwtDB db = new TwtDB();
 	
-	public boolean IsUserExist(String userName, String password)
+	public boolean IsUserExist(String userName, String pwd)
 	{
 		boolean isExist = false;
+		
+		ArrayList<Twitteruser> info = db.getUserInfo(userName, pwd);
+		if(!info.isEmpty()){
+			isExist = true;
+		}
 		
 		return isExist;
 	}

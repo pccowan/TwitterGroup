@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import model.Twitterfeed;
+import model.Twitteruser;
 
 
 public class TwtDB {
@@ -28,5 +29,25 @@ public class TwtDB {
 		
 		return new ArrayList<Twitterfeed>(fd);
 	}
-
+	
+	public ArrayList<Twitteruser> getUserInfo(String username, String pwd){
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		List<Twitteruser> usr = null;
+		
+		try {
+			String sql = "select u from Twitteruser u where u.username = :username and u.pwd = :pwd";
+			TypedQuery<Twitteruser> q = em.createQuery(sql, Twitteruser.class);
+			q.setParameter("username", username);
+			q.setParameter("pwd", pwd);
+			
+			usr = q.getResultList();
+			
+		} catch (Exception e){
+			System.out.println(e);
+		} finally {
+			em.close();
+		}
+		
+		return new ArrayList<Twitteruser>(usr);
+	}
 }
