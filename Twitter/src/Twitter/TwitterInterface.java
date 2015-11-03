@@ -2,7 +2,10 @@ package Twitter;
 
 import java.util.ArrayList;
 
+import model.Twitterfeed;
+
 public class TwitterInterface {
+	TwtDB db = new TwtDB();
 	
 	public boolean IsUserExist(String userName, String password)
 	{
@@ -40,10 +43,8 @@ public class TwitterInterface {
 		return twt;
 	}
 	
-	public ArrayList<TwtDataDetail> PullFeeds(){
-		ArrayList<TwtDataDetail> twt = null;
-		
-		return twt;
+	public ArrayList<Twitterfeed> PullFeeds(){
+		return db.getAllFeeds();
 	}
 
 }
