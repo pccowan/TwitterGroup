@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +12,11 @@
 	integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
 	crossorigin="anonymous">
 </head>
-<body style='background-color:grey'>
+<%//HttpSession session = request.getSession();
+	String uName = (String) session.getAttribute("key");
+	if (uName != null)
+	response.sendRedirect("HomeFeed"); %>
+<body>
 	<nav class="navbar navbar-inverse navbar-fixed-top"
 		style="background-color: #141452">
 	<div class="container">
@@ -41,7 +47,7 @@
 	<br>
 	<div class="container">
 		<form action="LoginServlet" method="POST">
-			<div class="form-group"> 
+			<div class="form-group">
 				<label for="username" style="color: #141452"></label> <input
 					type="Text" class="form-control" name="username"
 					placeholder="Username">
