@@ -54,6 +54,9 @@ public class TwitterInterface {
 	
 	public boolean addNewFeed(String userName, String feed){
 		boolean isSuccess = false;
+		if(db.addFeed(userName, feed)){
+			isSuccess = true;
+		}
 		
 		return isSuccess;
 		
@@ -67,6 +70,10 @@ public class TwitterInterface {
 	
 	public ArrayList<Twitterfeed> pullFeeds(){
 		return db.getAllFeeds();
+	}
+	
+	public ArrayList<Twitterfeed> pullProfile1(String username){
+		return db.PullProfile(username);
 	}
 
 }

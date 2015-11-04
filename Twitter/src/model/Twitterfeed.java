@@ -17,6 +17,8 @@ public class Twitterfeed implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_post")
+    @SequenceGenerator(schema="testuserdb", name="seq_post", sequenceName="seq_post", allocationSize=1)
 	private long postid;
 
 	private String post;

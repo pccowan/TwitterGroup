@@ -1,5 +1,6 @@
 package Twitter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -98,4 +99,53 @@ public class TwtDB {
 		
 		return isSuccess;
 	}
+
+	public ArrayList<Twitterfeed> PullProfile(String username) {
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		List<Twitterfeed> fd = null;
+
+		try {
+			String sql = "select t from Twitterfeed t where t.username = :username";
+			TypedQuery<Twitterfeed> results = em.createQuery(sql,
+					Twitterfeed.class);
+			results.setParameter("username", username);
+			fd = results.getResultList();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			em.close();
+		}
+
+		return new ArrayList<Twitterfeed>(fd);
+	}
+	
+	public boolean addFeed(String username, String post){
+		boolean isSuccess = false;
+		
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		EntityTransaction trans = em.getTransaction();
+		
+		Twitterfeed fd = new Twitterfeed();
+		fd.setPost(post);
+		fd.setUsername(username);
+		fd.setPostDate(new Date());
+		
+		trans.begin();
+		
+		try{
+			em.persist(fd);
+			trans.commit();
+			isSuccess = true;
+		}catch(Exception e){
+			System.out.println(e);
+			trans.rollback();
+		}finally{
+			em.close();
+		}
+		
+		return isSuccess;
+	}
+	
 }
+
