@@ -37,9 +37,12 @@ public class Process extends HttpServlet {
 		 TwitterInterface T = new TwitterInterface();
 		 
 		 boolean ExistingUser= T.isUserMatching(UN,PWD);
+		 ExistingUser=T.isUserExist(UN);
+		 
+		 
 		 if(ExistingUser)
 		 {
-			
+			 
 			 /* out.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Twitter Home</title>");
 		 out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css\" integrity=\"sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==\"crossorigin=\"anonymous\">");
 		 out.println("</head><body><nav class=\"navbar navbar-inverse navbar-floating-top\"	style=\"background-color: #141452\"><div class=\"container\">");
@@ -52,20 +55,34 @@ public class Process extends HttpServlet {
 		 out.println("<a href=\"HomeFeed\">Home</a>");
 		 out.println("</div></div><br/><br/><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js\"></script><script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js\"	integrity=\"sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==\" crossorigin=\"anonymous\"></script></body></html>");
 		 */
-		 RequestDispatcher rd = request.getRequestDispatcher("/HomeFeed");
-		 rd.forward(request, response);
+			  out.println("<script type=\"text/javascript\">");
+			   out.println("alert('User Already Exist');");
+			   out.println("location='SignUp.html';");
+			   out.println("</script>");
 		 
 		 }
-		 else
+		 else if(UN != null && !UN.isEmpty())
 		 {
 			 boolean NewUser = T.createNewAccount(UN, PWD);
 			 if(NewUser)
 			 {
-				 out.println("alert(\"User Created\")"); 
+				  out.println("<script type=\"text/javascript\">");
+				   out.println("alert('New User Added');");
+				   out.println("location='HomeFeed';");
+				   out.println("</script>");
+
 				
 			 }
-			 RequestDispatcher rd = request.getRequestDispatcher("/HomeFeed");
-			 rd.forward(request, response); 
+/*			 RequestDispatcher rd = request.getRequestDispatcher("/HomeFeed");
+			 rd.forward(request, response); */
+		 }
+		 else
+		 {
+			 out.println("<script type=\"text/javascript\">");
+			   out.println("alert('Enter values');");
+			   out.println("location='SignUp.html';");
+			   out.println("</script>");
+			 
 		 }
 	
 	}
