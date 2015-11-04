@@ -46,7 +46,7 @@ out.println("<br>");
 out.println("<br>");
 
 TwitterInterface TI = new TwitterInterface();
-ArrayList<Twitterfeed> feedList= TI.PullFeeds();
+ArrayList<Twitterfeed> feedList= TI.pullFeeds();
 
 for (Twitterfeed g: feedList) 
 {

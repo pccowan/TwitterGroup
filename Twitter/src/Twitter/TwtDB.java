@@ -30,17 +30,17 @@ public class TwtDB {
 		return new ArrayList<Twitterfeed>(fd);
 	}
 	
-	public ArrayList<Twitteruser> getUserInfo(String username, String pwd){
+	
+	public Twitteruser getProfile(String username){
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
-		List<Twitteruser> usr = null;
+		Twitteruser usr = null;
 		
 		try {
-			String sql = "select u from Twitteruser u where u.username = :username and u.pwd = :pwd";
+			String sql = "select u from Twitteruser u where u.username = :username";
 			TypedQuery<Twitteruser> q = em.createQuery(sql, Twitteruser.class);
 			q.setParameter("username", username);
-			q.setParameter("pwd", pwd);
 			
-			usr = q.getResultList();
+			usr = q.getSingleResult();
 			
 		} catch (Exception e){
 			System.out.println(e);
@@ -48,6 +48,27 @@ public class TwtDB {
 			em.close();
 		}
 		
-		return new ArrayList<Twitteruser>(usr);
+		return usr;
+	}
+	
+	public Twitteruser getProfile(String username, String pwd){
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		Twitteruser usr = null;
+		
+		try {
+			String sql = "select u from Twitteruser u where u.username = :username and u.pwd = :pwd";
+			TypedQuery<Twitteruser> q = em.createQuery(sql, Twitteruser.class);
+			q.setParameter("username", username);
+			q.setParameter("pwd", pwd);
+			
+			usr = q.getSingleResult();
+			
+		} catch (Exception e){
+			System.out.println(e);
+		} finally {
+			em.close();
+		}
+		
+		return usr;
 	}
 }

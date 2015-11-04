@@ -8,12 +8,23 @@ import model.Twitteruser;
 public class TwitterInterface {
 	TwtDB db = new TwtDB();
 	
-	public boolean IsUserExist(String userName, String pwd)
+	public boolean isUserExist(String userName){
+		boolean isExist = false;
+		
+		Twitteruser t = db.getProfile(userName);
+		if (t != null){
+			isExist = true;
+		}
+		
+		return isExist;
+	}
+	
+	public boolean isUserMatching(String userName, String pwd)
 	{
 		boolean isExist = false;
 		
-		ArrayList<Twitteruser> info = db.getUserInfo(userName, pwd);
-		if(!info.isEmpty() && info !=null){
+		Twitteruser t = db.getProfile(userName, pwd);
+		if (t != null){
 			isExist = true;
 		}
 		
@@ -21,35 +32,42 @@ public class TwitterInterface {
 	}
 	
 	
-	public boolean CreateNewAccount(String userName, String password){
+	public boolean createNewAccount(String userName, String password){
 		boolean isSuccess = false;
+		
+		//check whether the user exists
+		if(isUserMatching(userName, password)){
+			return isSuccess;
+		}
+		
+		
 		
 		return isSuccess;
 		
 	}
 	
 	
-	public ArrayList<TwtData> PullProfile(String userName){
+	public ArrayList<TwtData> pullProfile(String userName){
 		ArrayList<TwtData> twt = null;
 		
 		return twt;
 		
 	}
 	
-	public boolean AddNewFeed(String userName, String feed){
+	public boolean addNewFeed(String userName, String feed){
 		boolean isSuccess = false;
 		
 		return isSuccess;
 		
 	}
 	
-	public ArrayList<TwtDataDetail> PullFeeds(int count){
+	public ArrayList<TwtDataDetail> pullFeeds(int count){
 		ArrayList<TwtDataDetail> twt = null;
 		
 		return twt;
 	}
 	
-	public ArrayList<Twitterfeed> PullFeeds(){
+	public ArrayList<Twitterfeed> pullFeeds(){
 		return db.getAllFeeds();
 	}
 

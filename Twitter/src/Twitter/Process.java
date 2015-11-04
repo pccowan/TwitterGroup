@@ -36,7 +36,7 @@ public class Process extends HttpServlet {
 		 
 		 TwitterInterface T = new TwitterInterface();
 		 
-		 boolean c= T.IsUserExist(UN,PWD);
+		 boolean c= T.isUserMatching(UN,PWD);
 		 if(c)
 		 {
 			/* PrintWriter out = response.getWriter();
