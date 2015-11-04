@@ -40,7 +40,10 @@ public class TwitterInterface {
 			return isSuccess;
 		}
 		
-		
+		//create new account
+		if(db.createNewUser(userName, password)){
+			isSuccess = true;
+		}
 		
 		return isSuccess;
 		

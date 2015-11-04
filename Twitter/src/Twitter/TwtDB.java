@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import model.Twitterfeed;
@@ -70,5 +71,31 @@ public class TwtDB {
 		}
 		
 		return usr;
+	}
+	
+	public boolean createNewUser(String username, String pwd){
+		boolean isSuccess = false;
+		
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		EntityTransaction trans = em.getTransaction();
+		
+		Twitteruser user = new Twitteruser();
+		user.setPwd(pwd);
+		user.setUsername(username);
+		
+		trans.begin();
+		
+		try{
+			em.persist(user);
+			trans.commit();
+			isSuccess = true;
+		}catch(Exception e){
+			System.out.println(e);
+			trans.rollback();
+		}finally{
+			em.close();
+		}
+		
+		return isSuccess;
 	}
 }

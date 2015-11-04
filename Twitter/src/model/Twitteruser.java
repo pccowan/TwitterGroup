@@ -15,6 +15,8 @@ public class Twitteruser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_USER")
+    @SequenceGenerator(schema="testuserdb", name="SEQ_USER", sequenceName="SEQ_USER", allocationSize=1)
 	private long userid;
 
 	private String pwd;
