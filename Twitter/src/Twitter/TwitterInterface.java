@@ -13,7 +13,7 @@ public class TwitterInterface {
 		boolean isExist = false;
 		
 		ArrayList<Twitteruser> info = db.getUserInfo(userName, pwd);
-		if(!info.isEmpty()){
+		if(!info.isEmpty() && info !=null){
 			isExist = true;
 		}
 		
