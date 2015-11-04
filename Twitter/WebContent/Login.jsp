@@ -35,7 +35,7 @@
 				<li></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="SignUp.html">Sign-up</a></li>
+				<li><a href="Process">Sign-up</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -65,9 +65,7 @@
 
 
 			<button class="btn btn-primary btn-sm">Login</button>
-			<a href="SignUp.html">
-				<button class="btn btn-primary btn-sm">Sign-up</button>
-			</a>
+			
 		</form>
 		<br> <br>
 	</div>

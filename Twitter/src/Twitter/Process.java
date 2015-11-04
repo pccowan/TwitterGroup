@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Process
@@ -32,6 +33,8 @@ public class Process extends HttpServlet {
 		// TODO Auto-generated method stub
 	
 		String UN= request.getParameter("UserName");
+		HttpSession session = request.getSession();
+		
 		 String PWD= request.getParameter("Password") ;
 		 PrintWriter out = response.getWriter();
 		 TwitterInterface T = new TwitterInterface();
@@ -66,9 +69,10 @@ public class Process extends HttpServlet {
 			 boolean NewUser = T.createNewAccount(UN, PWD);
 			 if(NewUser)
 			 {
-				  out.println("<script type=\"text/javascript\">");
+				 	session.setAttribute("key", UN);
+				 	out.println("<script type=\"text/javascript\">");
 				   out.println("alert('New User Added');");
-				   out.println("location='HomeFeed';");
+				   out.println("location='Profile';");
 				   out.println("</script>");
 
 				
