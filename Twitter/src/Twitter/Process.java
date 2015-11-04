@@ -31,16 +31,16 @@ public class Process extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	
-		String UN= request.getParameter("userName");
-		 String PWD= request.getParameter("password") ;
-		 
+		String UN= request.getParameter("UserName");
+		 String PWD= request.getParameter("Password") ;
+		 PrintWriter out = response.getWriter();
 		 TwitterInterface T = new TwitterInterface();
 		 
-		 boolean c= T.isUserMatching(UN,PWD);
-		 if(c)
+		 boolean ExistingUser= T.isUserMatching(UN,PWD);
+		 if(ExistingUser)
 		 {
-			/* PrintWriter out = response.getWriter();
-		 out.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Twitter Home</title>");
+			
+			 /* out.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Twitter Home</title>");
 		 out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css\" integrity=\"sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==\"crossorigin=\"anonymous\">");
 		 out.println("</head><body><nav class=\"navbar navbar-inverse navbar-floating-top\"	style=\"background-color: #141452\"><div class=\"container\">");
 		 out.println("<div class=\"navbar-header\"><button type=\"button\" class=\"navbar-toggle collapsed\"	data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\"><span class=\"sr-only\">Toggle navigation</span> <span>class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span></button></div>");
@@ -55,6 +55,17 @@ public class Process extends HttpServlet {
 		 RequestDispatcher rd = request.getRequestDispatcher("/HomeFeed");
 		 rd.forward(request, response);
 		 
+		 }
+		 else
+		 {
+			 boolean NewUser = T.createNewAccount(UN, PWD);
+			 if(NewUser)
+			 {
+				 out.println("alert(\"User Created\")"); 
+				
+			 }
+			 RequestDispatcher rd = request.getRequestDispatcher("/HomeFeed");
+			 rd.forward(request, response); 
 		 }
 	
 	}
