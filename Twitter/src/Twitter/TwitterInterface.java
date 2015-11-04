@@ -35,11 +35,6 @@ public class TwitterInterface {
 	public boolean createNewAccount(String userName, String password){
 		boolean isSuccess = false;
 		
-		//check whether the user exists
-		if(isUserMatching(userName, password)){
-			return isSuccess;
-		}
-		
 		//create new account
 		if(db.createNewUser(userName, password)){
 			isSuccess = true;
